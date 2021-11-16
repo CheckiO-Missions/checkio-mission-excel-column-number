@@ -24,7 +24,7 @@ TESTS = {
         },
         {
             "input": ["ZY"],
-            "answer": 708,
+            "answer": 701,
         }
     ],
     "Extra": [
