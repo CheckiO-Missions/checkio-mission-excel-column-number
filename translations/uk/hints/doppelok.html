@@ -1,0 +1,113 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        Я не знаю, як розпочати вирішення цієї місії
+    </div>
+    <div class="answer">
+        Місія тут проста. Тобі потрібно подумати, як математично описати прогресію номера колонки, опираючись на те, що
+        ти знаєш літери цієї колонки (чим старша літера, чим більше літер - тим більше буде число). Можливо можна якось
+        перетворити літери на ціле число...?
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Мені потрібна допомога, щоб продовжити місію
+    </div>
+    <div class="answer">
+        Тобі буде корисно прочитати трохи інформації про:
+        <a href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_ord.asp'>приклад</a> ),
+        <a href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_len.asp'>приклад</a> ).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Потрібна допомога!
+    </div>
+    <div class="answer">
+        Отже, нам потрібно конвертувати нашу літеру колонки у ціле число. Буде це виглядати наступним чином.
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+            <div class="output">
+                <p>Вивід</p>
+                <pre>65</pre>
+            </div>
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я вже не знаю що робити. Мені потрібна маленька підказка.
+    </div>
+    <div class="answer">
+        Нам потрібно, щоб перша літера виводила 1, а не 65. А також функція ord() може приймати тільки одну літеру.
+        Тож передбачимо це теж, на випадок рядка довжина якого більше ніж 1. Використаємо цикл while, в якому ми
+        будемо по одному брати елемент з рядка, до тих пір, поки рядок не закінчиться.
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+            <div class="output">
+                <p>Вивід</p>
+                <pre>1</pre>
+                <pre>25</pre>
+            </div>
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Нічого не працює. SOS
+    </div>
+    <div class="answer">
+        Гаразд, тепер потрібно подумати над математикою. Якщо у нас одна літера в рядку - все зрозуміло, ми просто повертаємо її
+        "значення" у вигляді цілого числа. Але якщо дві або більше літери? Розберемо на прикладі двох  літер "AY".
+        Оскільки літер дві, та перша літера "A", то це означає що вона матиме значення 27, а не 1, оскільки вона йде після "Z".
+        Далі літера "Y", вона має значення 25, тож сумуємо 27 + 25 і наш результат.
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Не хочу здаватись, допоможи!
+    </div>
+    <div class="answer">
+        Тобі залишилось обгорнути код у вираз функції, та повернути значення result.
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+    return result
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я хочу бути кращим з кращих ПРОГРАМІСТІВ!!! ПОКАЖИ МЕНІ БІЛЬШЕ РІШЕНЬ!!1!!!11!
+    </div>
+    <div class="answer">
+        Добре, добре! Оце настрій!=)
+        Ось варіант рішення через цикл for. Математична формула така сама.
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+    return total
+        </pre>
+    </div>
+</div>
+
+
+</body>

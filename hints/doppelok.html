@@ -1,0 +1,115 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        I don't know how to start solving this mission
+    </div>
+    <div class="answer">
+        The mission here is simple. You need to think how to mathematically describe the progression of
+        the column number, based on the fact that you know the letters of this column (the higher the
+        letter, the more letters - the bigger the number will be). Maybe you can somehow convert the
+        letters to an integer...?
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I need help to continue the mission
+    </div>
+    <div class="answer">
+        It will be useful for you to read some information about:
+        <a href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_ord.asp'>example</a> ),
+        <a href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_len.asp'>example</a> ).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Need help!
+    </div>
+    <div class="answer">
+        So we need to convert our column letter to an integer. It will look like this.
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+        </pre>
+            <div class="output">
+                <p>Output</p>
+                <pre>65</pre>
+            </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I don't know what to do anymore. I need a little hint.
+    </div>
+    <div class="answer">
+        We need the first letter to output 1, not 65. Also, the ord() function can only accept one letter.
+        So let's predict this too, in the case of a line whose length is greater than 1. We will use a while
+        loop, in which we will take one element from the line until the line ends.
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+            <div class="output">
+                <p>Вивід</p>
+                <pre>1</pre>
+                <pre>25</pre>
+            </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Nothing works. SOS
+    </div>
+    <div class="answer">
+        Okay, now it's time to think about the math. If we have one letter in a string - everything is clear, we just
+        return its "value" in the form of an integer. But if there are two or more letters? Let's analyze the two letters
+        "AY" as an example. Since there are two letters, and the first letter is "A", this means that it will
+        have a value of 27, not 1, since it comes after "Z". Next is the letter "Y", it has a value of 25,
+        so we add 27 + 25 and our result.
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I don't want to give up, help!
+    </div>
+    <div class="answer">
+        All you have to do is wrap the code in a function expression and return the result value.
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+    return result
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I want to be the best of the best PROGRAMMERS!!! SHOW ME MORE SOLUTIONS!!1!!!11!
+    </div>
+    <div class="answer">
+        Okay, okay! That's the spirit!=)
+        Here is a variant of the solution through the for loop. The mathematical formula is the same.
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+    return total
+        </pre>
+    </div>
+</div>
+
+
+</body>
