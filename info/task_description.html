@@ -3,21 +3,48 @@
 <p>
     Given a string that represents the column title as appears in an Excel sheet, return its corresponding column number.
 </p>
+<p>
+    But how does the Excel column numbering actually work? Well, the column number is like decimal number, but with base (radix) <b>26</b> and "digits" <b>A-Z</b>. <a target="_blank" href="https://en.wikipedia.org/wiki/Radix">Read more about number bases</a>. Let's look at the exact numbers:
+</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+</pre>
+<p>The 1-"digit" numbers have ended. 2-"digits" numbers start from double first "digit" and go to double last one:</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+   AA   27
+   ..
+   AZ   52
+   BA   53
+   ..
+   BZ   78
+   CA   79
+   ..
+   ..
+   ZZ   702
+</pre>
+<p>Now it's turn for 3-"digit" numbers...</p>
 
 <!-- Explain input and output values -->
 <p>
-    <strong>Input: </strong> String.
+    <strong>Input:</strong> String.
 </p>
 
 <p>
-    <strong>Output: </strong> Int. 
+    <strong>Output:</strong> {% if is_js %}Number{% else %}Integer{% endif %}. 
 </p>
 
 
 <!-- Give some usage examples -->
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Examples:</strong>
     </p>
 
 <pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
