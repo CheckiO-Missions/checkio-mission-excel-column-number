@@ -25,12 +25,12 @@ TESTS = {
         {
             "input": ["ZY"],
             "answer": 701,
-        }
+        },
     ],
     "Extra": [
         {
             "input": ["FXSHRXW"],
             "answer": 2147483647,
-        }
+        },
     ]
 }
