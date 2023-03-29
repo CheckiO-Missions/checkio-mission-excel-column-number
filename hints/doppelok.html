@@ -99,6 +99,7 @@ while name:
         <p>
             All you have to do is wrap the code in a function expression and return the <b class="code">result</b> value.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def column_number(name: str) -> int:
 
@@ -108,6 +109,7 @@ def column_number(name: str) -> int:
         name = name[1:]
     return result
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -120,6 +122,7 @@ def column_number(name: str) -> int:
         <p>
             Okay, okay! That's the spirit!=) Here is a variant of the solution through the <b class="code">for</b> loop. The mathematical formula is the same.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def column_number(name: str) -> int:
 
@@ -128,6 +131,7 @@ def column_number(name: str) -> int:
         total += (ord(j) - 64) * (26 ** i)
     return total
         </pre>
+        </div>
     </div>
 </div>
 </body>
