@@ -95,6 +95,7 @@ while name:
         <p>
             Тобі залишилось обгорнути код у вираз функції, та повернути значення <b class="code">result</b>.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def column_number(name: str) -> int:
 
@@ -102,8 +103,10 @@ def column_number(name: str) -> int:
     while name:
         result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
         name = name[1:]
+        
     return result
         </pre>
+        </div>
     </div>
 </div>
 <div class="question-answer">
@@ -116,13 +119,17 @@ def column_number(name: str) -> int:
         <p>
             Добре, добре! Оце настрій!=) Ось варіант рішення через цикл <b class="code">for</b>. Математична формула така сама.
         </p>
+        <div class="spoiler">
         <pre class="brush: python">
 def column_number(name: str) -> int:
+
     total = 0
     for i, j in enumerate(name[::-1]):
         total += (ord(j) - 64) * (26 ** i)
+        
     return total
         </pre>
+        </div>
     </div>
 </div>
 </body>
