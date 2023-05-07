@@ -5,7 +5,7 @@
     </div>
     <div class="answer">
         <p>
-            💡 As said in description, excel column letter title is built like the well-known decimal number, but with base 26 (number of letters in alphabet). So, the way to solve the task is to take letter on each position, convert it to number and multiply with base in power respective to the position. Then summarize all these numbers.
+            💡 As said in description, Excel column letter title is built like the well-known decimal number, but with base 26 (number of letters in alphabet). So, the way to solve the task is to take letter on each position, convert it to number and multiply with base in power respective to the position. Then summarize all these numbers.
         </p>
     </div>
 </div>
@@ -59,7 +59,7 @@ name.charCodeAt(i)-64
             Let's explore a decimal (10-based) number "12" for example. To "get" to 12 from 0, you need to move all base (1..10) and two steps more (11, 12). Being more abstract, if you have a two-digit decimal number "ab", how many "ones" it includes? Its a*10 + b.
         </p>
         <p>
-            The same is here. If you have an excel title "AB", how many "ones" it includes? You need to move from "A" to "Z" (thru the whole base - 26) and two more steps ("AA", "AB"): a*26 + b (where "a", "b" - number equivalents of "A", 'B').
+            The same is here. If you have an Excel title "AB", how many "ones" it includes? You need to move from "A" to "Z" (thru the whole base - 26) and two more steps ("AA", "AB"): a*26 + b (where "a", "b" - number equivalents of "A", 'B').
         </p>
         <p>
             When you have big numbers in any base, the rule is the same actually: to get number of "ones", you should number on every position multiply with base in some power. In our case:
