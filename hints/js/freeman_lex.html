@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission.
+    </div>
+    <div class="answer">
+        <p>
+            💡 As said in description, excel column letter title is built like the well-known decimal number, but with base 26 (number of letters in alphabet). So, the way to solve the task is to take letter on each position, convert it to number and multiply with base in power respective to the position. Then summarize all these numbers.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, what should I start from?
+    </div>
+    <div class="answer">
+        <p>
+            lets declare a variable <b class="code">res</b>, in which you are going to accumulate result for each letter and return at the end.
+        </p>
+        <pre class="brush: javascript">
+let res = 0;
+...
+return res
+        </pre>
+        <p>
+            Next you obviously need to iterate over the given string and increase <b class="code">res</b> for some value. Use <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">for loop</a> and string <a target="_blank" href="https://www.w3schools.com/jsref/jsref_length_string.asp">length</a> property for it.
+        </p>
+        <pre class="brush: javascript">
+for (let i = 0; i < name.length; i++){
+    res += ...
+}
+        </pre>
+</div>
+<div class="question-answer">
+    <div class="question">
+        What should I do next?
+    </div>
+    <div class="answer">
+        <p>
+            Now while iterating you need to convert each character into its number equivalent, so "A" should become 1 (since it's the first number in this system), "B" - 2..."Z" - 26. For this purpose, use <a target="_blank" href="https://www.w3schools.com/jsref/jsref_charcodeat.asp">charCodeAt()</a> method, which returns the code for character at exact index.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)
+        </pre>
+        <p>
+            You may notice, that this method returns 65 for "A". So, to get 1 you need to subtract 64.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)-64
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Explain me more about base here.
+    </div>
+    <div class="answer">
+        <p>
+            Let's explore a decimal (10-based) number "12" for example. To "get" to 12 from 0, you need to move all base (1..10) and two steps more (11, 12). Being more abstract, if you have a two-digit decimal number "ab", how many "ones" it includes? Its a*10 + b.
+        </p>
+        <p>
+            The same is here. If you have an excel title "AB", how many "ones" it includes? You need to move from "A" to "Z" (thru the whole base - 26) and two more steps ("AA", "AB"): a*26 + b (where "a", "b" - number equivalents of "A", 'B').
+        </p>
+        <p>
+            When you have big numbers in any base, the rule is the same actually: to get number of "ones", you should number on every position multiply with base in some power. In our case:
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        How to find out this power?
+    </div>
+    <div class="answer">
+        <p>
+            Let's discover another example with bigger decimal number. If you have a number with digits 1 2 5, how many "ones" it includes? It's 1*10**2 + 2*10**1 + 5*10**0 = 125. With 0-base index "i" you may see, that i+power = length - 1. So power = length - 1 - i. This rule works for any base.
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        So, how my final solution should look like?
+    </div>
+    <div class="answer">
+        <p>
+            You just need to join everything together and wrap your code into function expression. 
+        </p>
+        <p>Here is the whole solution:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+
+    let res = 0;
+    for (let i = 0; i < name.length; i++){
+        res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+    }
+    return res
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Show me more solutions!<br />
+        'Cause I wanna be a real 🥇 Javascript Hero!
+    </div>
+    <div class="answer">
+        <p>Sure, grab it!</p>
+        <p>
+            Convert string into array and using <b class="code">reduce</b> function at each step multiply with base and add number equivalent for current character.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+    return [...name].reduce((col, c) => col * 26 + c.charCodeAt(0) - 64, 0);
+    }
+        </pre>
+        </div>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Thanks! I know and understand more now! Everything works fine!
+    </div>
+    <div class="answer">
+        👍 Glad to hear it!
+    </div>
+</div>
+</body>
