@@ -1,0 +1,57 @@
+<!-- Describe task in general -->
+
+<p>
+    Étant donné une chaîne qui représente le titre d'une colonne tel qu'il apparaît dans une feuille Excel, renvoyez le numéro de la colonne correspondante.
+</p>
+<p>
+    Mais comment fonctionne la numérotation des colonnes dans Excel? Le numéro de colonne ressemble à un nombre décimal, mais avec la base (radix) <b>26</b> et les "chiffres" <b>A-Z</b>. <a target="_blank" href="https://en.wikipedia.org/wiki/Radix">Read more about number bases</a>. Examinons les nombres exacts:
+</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+</pre>
+<p>Les nombres à 1 "chiffre" sont terminés. les nombres à 2 "chiffres" partent du double du premier "chiffre" et vont jusqu'au double du dernier:</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+   AA   27
+   ..
+   AZ   52
+   BA   53
+   ..
+   BZ   78
+   CA   79
+   ..
+   ..
+   ZZ   702
+</pre>
+<p>C'est maintenant au tour des numéros à 3 "chiffres"...</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Entrée:</strong> Une <span>chaîne de caractères</span> <span>(string)</span>.
+</p>
+
+<p>
+   <strong>Sortie:</strong> {% if is_js %}<span>Nombre</span> <span>(Number)</span>{% else %}<span>Entier</span> <span>(Integer)</span>{% endif %}. 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Exemples:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Condition préalable:</strong>
+    <i>Non vide, uniquement majuscules, uniquement lettres anglaises</i>
+</p>

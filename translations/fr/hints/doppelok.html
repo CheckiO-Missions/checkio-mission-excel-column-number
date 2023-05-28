@@ -1,0 +1,139 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je ne sais pas comment commencer à résoudre cette mission.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            La mission est simple. Vous devez réfléchir à la manière de décrire mathématiquement la progression du numéro de la colonne, en vous basant sur le fait que vous connaissez les lettres de cette colonne (plus la lettre est élevée, plus il y a de lettres - plus le numéro sera grand). Vous pouvez peut-être convertir les lettres en un nombre entier...?
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            J'ai besoin d'aide pour poursuivre la mission.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Il vous sera utile de lire quelques informations sur:
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_ord.asp'>example</a>),
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_len.asp'>example</a>).
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Besoin d'aide!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Nous devons donc convertir la lettre de notre colonne en un entier. Cela se passera comme suit.
+        </p>
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+        </pre>
+        <div class="output">
+            <p>Sortie:</p>
+            <pre>65</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je ne sais plus quoi faire. J'ai besoin d'un petit conseil.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Il faut que la première lettre produise 1, et non 65. De plus, la fonction ord() ne peut accepter qu'une seule lettre. Prédisons donc cela aussi, dans le cas d'une ligne dont la longueur est supérieure à 1. Nous utiliserons une boucle <b class="code">while</b>, dans laquelle nous prendrons un élément de la ligne jusqu'à ce que la ligne se termine.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+        <div class="output">
+            <p>Résultat:</p>
+            <pre>1</pre>
+            <pre>25</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Rien ne fonctionne. SOS
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Bon, il est temps de penser aux mathématiques. Si nous avons une lettre dans une chaîne de caractères, tout est clair, nous renvoyons simplement sa "valeur" sous la forme d'un entier. Mais s'il y a deux lettres ou plus? Prenons l'exemple des deux lettres "AY". Puisqu'il y a deux lettres, et que la première est "A", cela signifie qu'elle aura une valeur de 27, et non de 1, puisqu'elle vient après "Z". Ensuite, la lettre "Y" a une valeur de 25, nous ajoutons donc 27 + 25 et nous obtenons notre résultat.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je ne veux pas abandonner, aidez-moi!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Tout ce que vous avez à faire est d'envelopper le code dans une expression de fonction et de renvoyer la valeur <b class="code">result</b>.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+        
+    return result
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je veux être le meilleur des meilleurs PROGRAMMEURS!!! MONTREZ-MOI D'AUTRES SOLUTIONS!!1!!!11!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            D'accord, d'accord! C'est l'esprit!=) Voici une variante de la solution à travers la boucle <b class="code">for</b>. La formule mathématique est la même.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+        
+    return total
+        </pre>
+        </div>
+    </div>
+</div>
+</body>
