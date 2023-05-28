@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+    </div>
+    <div class="answer">
+        <p>
+            💡 Comme indiqué dans la description, le titre des lettres de la colonne Excel est construit comme le nombre décimal bien connu, mais avec la base 26 (nombre de lettres de l'alphabet). Donc, la façon de résoudre la tâche est de prendre la lettre sur chaque position, la convertir en nombre et multiplier avec la base dans la puissance respective à la position. Ensuite, résumez tous ces nombres.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, par quoi dois-je commencer?
+    </div>
+    <div class="answer">
+        <p>
+            déclarons une variable <b class="code">res</b>, dans laquelle vous allez accumuler les résultats pour chaque lettre et les retourner à la fin.
+        </p>
+        <pre class="brush: javascript">
+let res = 0;
+...
+return res
+        </pre>
+        <p>
+            Ensuite, vous devez évidemment itérer sur la chaîne donnée et augmenter <b class="code">res</b> pour une certaine valeur. Pour ce faire, utilisez les propriétés <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">for loop</a> et la chaîne <a target="_blank" href="https://www.w3schools.com/jsref/jsref_length_string.asp">length</a>.
+        </p>
+        <pre class="brush: javascript">
+for (let i = 0; i < name.length; i++){
+    res += ...
+}
+        </pre>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Que dois-je faire ensuite?
+    </div>
+    <div class="answer">
+        <p>
+            Pendant l'itération, vous devez convertir chaque caractère en son équivalent numérique. Ainsi, "A" doit devenir 1 (puisqu'il s'agit du premier nombre dans ce système), "B" - 2... "Z" - 26. Pour ce faire, utilisez la méthode <a target="_blank" href="https://www.w3schools.com/jsref/jsref_charcodeat.asp">charCodeAt()</a>, qui renvoie le code du caractère à l'index exact.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)
+        </pre>
+        <p>
+            Vous remarquerez que cette méthode renvoie 65 pour "A". Pour obtenir 1, vous devez donc soustraire 64.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)-64
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Expliquez-moi plus en détail ce qu'est la base ici.
+    </div>
+    <div class="answer">
+        <p>
+            Prenons l'exemple d'un nombre décimal (base 10), "12". Pour "arriver" à 12 à partir de 0, vous devez déplacer toute la base (1..10) et deux étapes supplémentaires (11, 12). De manière plus abstraite, si vous avez un nombre décimal à deux chiffres "ab", combien de "uns" comprend-il? C'est a*10 + b.
+        </p>
+        <p>
+            Il en va de même ici. Si vous avez un titre Excel "AB", combien de "1" comprend-il? Vous devez passer de "A" à "Z" (en passant par la base entière - 26) et deux étapes supplémentaires ("AA", "AB"): a*26 + b (où "a", "b" sont les équivalents numériques de "A", "B").
+        </p>
+        <p>
+            Lorsque vous avez de grands nombres dans n'importe quelle base, la règle est la même: pour obtenir le nombre de "un", vous devez multiplier le nombre de chaque position avec la base dans une certaine puissance. Dans notre cas:
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Comment trouver cette puissance?
+    </div>
+    <div class="answer">
+        <p>
+            Découvrons un autre exemple avec un nombre décimal plus grand. Si vous avez un nombre avec les chiffres 1 2 5, combien de "un" comprend-il? C'est 1*10**2 + 2*10**1 + 5*10**0 = 125. Avec l'indice de base 0 "i", vous pouvez constater que i+puissance = longueur - 1. Donc puissance = longueur - 1 - i. Cette règle s'applique à toutes les bases.
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Alors, à quoi devrait ressembler ma solution finale?
+    </div>
+    <div class="answer">
+        <p>
+            Il vous suffit d'assembler le tout et d'envelopper votre code dans une expression de fonction. 
+        </p>
+        <p>Voici la solution complète:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+
+    let res = 0;
+    for (let i = 0; i < name.length; i++){
+        res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+    }
+    return res
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Montrez-moi d'autres solutions!<br />
+        parce que je veux être un vrai 🥇 Javascript Hero!
+    </div>
+    <div class="answer">
+        <p>Bien sûr, prenez-le!</p>
+        <p>
+            Convertissez une chaîne de caractères en un tableau et utilisez la fonction <b class="code">reduce</b> à chaque étape pour multiplier avec la base et ajouter le nombre équivalent au caractère actuel.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+    return [...name].reduce((col, c) => col * 26 + c.charCodeAt(0) - 64, 0);
+    }
+        </pre>
+        </div>
+        <p><b>Click "Best solutions" at mission menu and see a lot of other interesting solutions!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Merci! Je comprends mieux maintenant! Tout fonctionne bien!
+    </div>
+    <div class="answer">
+        👍 Heureux de l'apprendre!
+    </div>
+</div>
+</body>
