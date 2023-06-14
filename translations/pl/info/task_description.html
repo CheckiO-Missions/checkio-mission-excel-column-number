@@ -1,0 +1,57 @@
+<!-- Describe task in general -->
+
+<p>
+    Podając ciąg znaków reprezentujący tytuł kolumny wyświetlany w arkuszu programu Excel, proszę zwrócić odpowiadający mu numer kolumny.
+</p>
+<p>
+    Ale jak właściwie działa numeracja kolumn w Excelu? Cóż, numer kolumny jest jak liczba dziesiętna, ale z podstawą (radix) <b>26</b> i "cyframi" <b>A-Z</b>. <a target="_blank" href="https://en.wikipedia.org/wiki/Radix">Read more about number bases</a>. Przyjrzyjmy się dokładnym liczbom:
+</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+</pre>
+<p>Liczby 1-"cyfrowe" zakończyły się. liczby 2-"cyfrowe" zaczynają się od podwojonej pierwszej "cyfry" i przechodzą do podwojonej ostatniej:</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+   AA   27
+   ..
+   AZ   52
+   BA   53
+   ..
+   BZ   78
+   CA   79
+   ..
+   ..
+   ZZ   702
+</pre>
+<p>Teraz kolej na liczby 3-cyfrowe...</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Wejście:</strong> Ciąg znaków <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>Wyjście:</strong> Liczba całkowita <span>{% if is_js %}(number){% else %}(int){% endif %}</span>. 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Przykłady:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Warunek wstępny:</strong>
+    <i>Niepuste, tylko wielkie litery, tylko angielskie litery</i>
+</p>
