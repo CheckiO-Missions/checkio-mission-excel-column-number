@@ -1,0 +1,139 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie wiem, jak zacząć rozwiązywać tę misję.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Zadanie jest proste. Musi Pan wymyślić, jak matematycznie opisać progresję numeru kolumny, bazując na tym, że zna Pan litery tej kolumny (im wyższa litera, tym więcej liter - tym większa będzie liczba). Może uda się Panu jakoś przekonwertować litery na liczbę całkowitą...?
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę mi pomóc kontynuować misję.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Przyda się Państwu kilka informacji na ten temat:
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_ord.asp'>example</a>),
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_len.asp'>example</a>).
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę o pomoc!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Musimy więc przekonwertować naszą literę kolumny na liczbę całkowitą. Będzie to wyglądać następująco.
+        </p>
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+        </pre>
+        <div class="output">
+            <p>Wynik:</p>
+            <pre>65</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie wiem już, co robić. Potrzebuję małej podpowiedzi.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Potrzebujemy pierwszej litery, aby wyświetlić 1, a nie 65. Ponadto funkcja ord() może przyjąć tylko jedną literę. Proszę więc przewidzieć również to, w przypadku linii, której długość jest większa niż 1. Użyjemy pętli <b class="code">while</b>, w której będziemy pobierać jeden element z linii, aż do jej zakończenia.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+        <div class="output">
+            <p>Wynik:</p>
+            <pre>1</pre>
+            <pre>25</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nic nie działa. SOS
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Ok, teraz czas pomyśleć o matematyce. Jeśli mamy jedną literę w ciągu - wszystko jest jasne, po prostu zwracamy jej "wartość" w postaci liczby całkowitej. Ale jeśli są dwie lub więcej liter? Przeanalizujmy dwie litery "AY" jako przykład. Ponieważ są dwie litery, a pierwszą literą jest "A", oznacza to, że będzie ona miała wartość 27, a nie 1, ponieważ występuje po "Z". Następna jest litera "Y", która ma wartość 25, więc dodajemy 27 + 25 i otrzymujemy wynik.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie chcę się poddawać, proszę mi pomóc!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Wszystko, co musi Pan zrobić, to zawinąć kod w wyrażenie funkcji i zwrócić wartość <b class="code">result</b>.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+        
+    return result
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Chcę być najlepszym z najlepszych PROGRAMISTÓW!!! PROSZĘ POKAZAĆ MI WIĘCEJ ROZWIĄZAŃ!!!1!!!11!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Dobra, dobra! That's the spirit!=) Oto wariant rozwiązania poprzez pętlę <b class="code">for</b>. Wzór matematyczny jest taki sam.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+        
+    return total
+        </pre>
+        </div>
+    </div>
+</div>
+</body>

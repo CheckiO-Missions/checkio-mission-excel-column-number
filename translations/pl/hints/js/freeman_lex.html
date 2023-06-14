@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+    </div>
+    <div class="answer">
+        <p>
+            jak wspomniano w opisie, kolumna Excela zatytułowana literą jest zbudowana jak dobrze znana liczba dziesiętna, ale z podstawą 26 (liczba liter w alfabecie). Tak więc, sposobem na rozwiązanie zadania jest wzięcie litery na każdej pozycji, przekonwertowanie jej na liczbę i pomnożenie przez podstawę w potędze odpowiedniej do pozycji. Następnie proszę podsumować wszystkie liczby.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, od czego powinienem zacząć?
+    </div>
+    <div class="answer">
+        <p>
+            proszę zadeklarować zmienną <b class="code">res</b>, w której będzie gromadzony wynik dla każdej litery i zwracany na końcu.
+        </p>
+        <pre class="brush: javascript">
+let res = 0;
+...
+return res
+        </pre>
+        <p>
+            Następnie trzeba oczywiście iterować po podanym ciągu i zwiększać <b class="code">res</b> dla jakiejś wartości. W tym celu proszę użyć właściwości <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">for loop</a> i string <a target="_blank" href="https://www.w3schools.com/jsref/jsref_length_string.asp">length</a>.
+        </p>
+        <pre class="brush: javascript">
+for (let i = 0; i < name.length; i++){
+    res += ...
+}
+        </pre>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Co powinienem zrobić dalej?
+    </div>
+    <div class="answer">
+        <p>
+            Teraz podczas iteracji należy przekonwertować każdy znak na jego odpowiednik liczbowy, więc "A" powinno stać się 1 (ponieważ jest to pierwsza liczba w tym systemie), "B" - 2... "Z" - 26. W tym celu proszę skorzystać z metody <a target="_blank" href="https://www.w3schools.com/jsref/jsref_charcodeat.asp">charCodeAt()</a>, która zwraca kod dla znaku o dokładnym indeksie.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)
+        </pre>
+        <p>
+            Proszę zauważyć, że ta metoda zwraca 65 dla "A". Tak więc, aby otrzymać 1 należy odjąć 64.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)-64
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę wyjaśnić mi więcej na temat podstawy.
+    </div>
+    <div class="answer">
+        <p>
+            Proszę przeanalizować na przykład liczbę dziesiętną (o podstawie 10) "12". Aby "dojść" do 12 od 0, trzeba przejść całą podstawę (1..10) i dwa kroki więcej (11, 12). Mówiąc bardziej abstrakcyjnie, jeśli ma Pan dwucyfrową liczbę dziesiętną "ab", ile "jedynek" ona zawiera? Jest to a*10 + b.
+        </p>
+        <p>
+            Podobnie jest tutaj. Jeśli ma Pan tytuł w Excelu "AB", ile "jedynek" on zawiera? Musi Pan przejść od "A" do "Z" (przez całą podstawę - 26) i jeszcze dwa kroki ("AA", "AB"): a*26 + b (gdzie "a", "b" - odpowiedniki liczbowe "A", "B").
+        </p>
+        <p>
+            Gdy mamy duże liczby w dowolnej podstawie, zasada jest właściwie taka sama: aby otrzymać liczbę "jedynek", należy liczbę na każdej pozycji pomnożyć przez podstawę w jakiejś potędze. W naszym przypadku:
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak znaleźć tę potęgę?
+    </div>
+    <div class="answer">
+        <p>
+            Proszę odkryć inny przykład z większą liczbą dziesiętną. Jeśli mają Państwo liczbę z cyframi 1 2 5, ile "jedynek" ona zawiera? Jest to 1*10**2 + 2*10**1 + 5*10**0 = 125. Z indeksem podstawy 0 "i" mogą Państwo zobaczyć, że i+moc = długość - 1. Zatem moc = długość - 1 - i. Ta zasada działa dla każdej podstawy.
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+    </div>
+    <div class="answer">
+        <p>
+            Wystarczy połączyć wszystko razem i zawinąć kod w wyrażenie funkcyjne. 
+        </p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+
+    let res = 0;
+    for (let i = 0; i < name.length; i++){
+        res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+    }
+    return res
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę pokazać mi więcej rozwiązań!<br />
+        bo chcę być prawdziwym 🥇 bohaterem Javascript!
+    </div>
+    <div class="answer">
+        <p>Jasne, proszę pobrać!</p>
+        <p>
+            Proszę przekonwertować ciąg znaków na tablicę i za pomocą funkcji <b class="code">reduce</b> na każdym kroku pomnożyć przez podstawę i dodać odpowiednik liczby dla bieżącego znaku.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+    return [...name].reduce((col, c) => col * 26 + c.charCodeAt(0) - 64, 0);
+    }
+        </pre>
+        </div>
+        <p>Proszę kliknąć <b>Best solutions</b> w menu misji i zobaczyć wiele innych ciekawych rozwiązań!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+    </div>
+    <div class="answer">
+        miło mi to słyszeć!
+    </div>
+</div>
+</body>
