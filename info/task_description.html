@@ -33,11 +33,11 @@ Excel   Decimal
 
 <!-- Explain input and output values -->
 <p>
-    <strong>Input:</strong> A <span translate="repeat">string</span>.
+    <strong>Input:</strong> A string <span translate="no">(str{% if is_js %}ing{% endif %})</span>.
 </p>
 
 <p>
-    <strong>Output:</strong> {% if is_js %}<span translate="repeat">Number</span>{% else %}<span translate="repeat">Integer</span>{% endif %}. 
+    <strong>Output:</strong> An integer <span translate="no">{% if is_js %}(number){% else %}(int){% endif %}</span>. 
 </p>
 
 
