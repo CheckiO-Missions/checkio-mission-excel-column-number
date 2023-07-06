@@ -1,0 +1,57 @@
+<!-- Describe task in general -->
+
+<p>
+    给出一个字符串，代表Excel表格中的列标题，返回其相应的列号。
+</p>
+<p>
+    但是，Excel的列号究竟是如何工作的呢？好吧，列号就像十进制数，但基数（小数）<b>26</b> ，"数字 "<b>A-Z</b>.<a target="_blank" href="https://en.wikipedia.org/wiki/Radix">Read more about number bases</a> 。让我们看看具体的数字：
+</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+</pre>
+<p>1-"数字 "的数字已经结束。2-"数字 "的数字从第一个数字的两倍开始，到最后一个数字的两倍：</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+   AA   27
+   ..
+   AZ   52
+   BA   53
+   ..
+   BZ   78
+   CA   79
+   ..
+   ..
+   ZZ   702
+</pre>
+<p>现在轮到3-"数字 "的数字了......</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>输入：</strong>一个字符串 <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>输出：</strong>一个整数 <span>{% if is_js %}(number){% else %}(int){% endif %}</span>. 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>例子：</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>前提条件：</strong>
+    <i>非空，只有大写字母，只有英文字母</i>
+</p>

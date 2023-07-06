@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        我不知道如何开始解决这个任务。
+    </div>
+    <div class="answer">
+        <p>
+            正如描述中所说，Excel列中的字母标题就像众所周知的十进制数字一样，但以26为基数（字母表中的字母数）。因此，解决这个任务的方法是将每个位置上的字母，转换为数字，并与相应位置的基数相乘。然后总结所有这些数字。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        好吧，我应该从什么开始？
+    </div>
+    <div class="answer">
+        <p>
+            让我们声明一个变量<b class="code">res</b> ，在这个变量中，你将累积每个字母的结果，并在最后返回。
+        </p>
+        <pre class="brush: javascript">
+let res = 0;
+...
+return res
+        </pre>
+        <p>
+            接下来你显然需要对给定的字符串进行迭代，并增加<b class="code">res</b> ，以获得一些值。使用<a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">for loop</a> 和字符串<a target="_blank" href="https://www.w3schools.com/jsref/jsref_length_string.asp">length</a> 属性来实现。
+        </p>
+        <pre class="brush: javascript">
+for (let i = 0; i < name.length; i++){
+    res += ...
+}
+        </pre>
+</div>
+<div class="question-answer">
+    <div class="question">
+        接下来我应该怎么做？
+    </div>
+    <div class="answer">
+        <p>
+            现在，在迭代过程中，你需要将每个字符转换为其数字等价物，所以 "A "应该变成1（因为它是这个系统中的第一个数字），"B"-2... "Z"-26。为此目的，使用<a target="_blank" href="https://www.w3schools.com/jsref/jsref_charcodeat.asp">charCodeAt()</a> 方法，该方法返回精确索引处的字符代码。
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)
+        </pre>
+        <p>
+            你可能注意到，这个方法对 "A "返回65。因此，要得到1，你需要减去64。
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)-64
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        在这里，请向我解释更多关于基数的问题。
+    </div>
+    <div class="answer">
+        <p>
+            让我们来探讨一个十进制（10进制）的数字 "12 "为例。为了从0 "得到 "12，你需要移动所有的基数（1...10）和两个步骤（11，12）。更抽象地说，如果你有一个两位数的小数 "ab"，它包括多少个 "1"？它的a*10+b。
+        </p>
+        <p>
+            这里也是如此。如果你有一个Excel标题 "AB"，它包括多少个 "1"？你需要从 "A "到 "Z"（通过整个基数--26），再走两步（"AA"、"AB"）：a*26+b（其中 "a"、"b"--"A"、"B "的数字等价物）。
+        </p>
+        <p>
+            当你有任何基数的大数字时，规则实际上是相同的：为了得到 "1 "的数量，你应该在每个位置上的数字与基数相乘，以某种力量。在我们的例子中：
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        如何找出这个幂？
+    </div>
+    <div class="answer">
+        <p>
+            让我们发现另一个有更大的小数的例子。如果你有一个数字是1 2 5，它包括多少个 "1"？就是1*10**2+2*10**1+5*10**0=125。以0为基数的指数 "i"，你可以看到，i+power=长度-1，所以power=长度-1-i，这个规则适用于任何基数。
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        那么，我的最终解决方案应该是什么样子的呢？
+    </div>
+    <div class="answer">
+        <p>
+            你只需要把所有的东西连在一起，把你的代码包成函数表达式。 
+        </p>
+        <p>下面是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+
+    let res = 0;
+    for (let i = 0; i < name.length; i++){
+        res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+    }
+    return res
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        告诉我更多的解决方案!<br />
+        因为我想成为一个真正的🥇 Javascript英雄!
+    </div>
+    <div class="answer">
+        <p>当然，抓住它!</p>
+        <p>
+            将字符串转换成数组，并在每一步使用<b class="code">reduce</b> 函数与基数相乘，并为当前字符添加数字等值。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+    return [...name].reduce((col, c) => col * 26 + c.charCodeAt(0) - 64, 0);
+    }
+        </pre>
+        </div>
+        <p>点击任务菜单上的<b>Best solutions</b> ，可以看到很多其他有趣的解决方案!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        谢谢!我现在知道并理解了更多!一切工作都很顺利!
+    </div>
+    <div class="answer">
+        👍很高兴听到这个消息!
+    </div>
+</div>
+</body>

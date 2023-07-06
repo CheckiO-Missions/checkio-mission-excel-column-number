@@ -1,0 +1,139 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道如何开始解决这个任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            这里的任务很简单。你需要根据你知道的这一列的字母（字母越高，字母越多--数字就越大），思考如何从数学上描述这一列数字的递增情况。也许你可以通过某种方式将这些字母转换成整数......？
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我需要帮助来继续完成任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            阅读一些有关的信息对你会有帮助：
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_ord.asp'>example</a>)、
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_len.asp'>example</a>)。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            需要帮助!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            所以我们需要将我们的列字母转换为整数。它将看起来像这样。
+        </p>
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+        </pre>
+        <div class="output">
+            <p>输出：</p>
+            <pre>65</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道该怎么做了。我需要一个小提示。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            我们需要第一个字母输出1，而不是65。另外，ord()函数只能接受一个字母。所以我们也来预测一下，在行的长度大于1的情况下。我们将使用一个<b class="code">while</b> 循环，在这个循环中我们将从行中抽取一个元素，直到行结束。
+        </p>
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+        <div class="output">
+            <p>输出：</p>
+            <pre>1</pre>
+            <pre>25</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            没有任何效果。SOS
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            好了，现在是时候考虑数学问题了。如果我们在一个字符串中只有一个字母--一切都很清楚，我们只是以整数的形式返回其 "值"。但如果有两个或更多的字母呢？让我们以 "AY "这两个字母为例进行分析。由于有两个字母，而第一个字母是 "A"，这意味着它的值是27，而不是1，因为它在 "Z "之后。接下来是字母 "Y"，它的值是25，所以我们把27+25加起来，我们的结果就是。
+        </p>
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不想放弃，请帮助我!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            你所要做的就是把代码包在一个函数表达式中，并返回<b class="code">result</b> 值。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+        
+    return result
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我想成为最好的程序员中的最好的程序员!!!告诉我更多的解决方案！！1！！11
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            好的，好的!这就是精神！=)这里是通过<b class="code">for</b> 循环的解决方案的一个变体。数学公式是一样的。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+        
+    return total
+        </pre>
+        </div>
+    </div>
+</div>
+</body>
