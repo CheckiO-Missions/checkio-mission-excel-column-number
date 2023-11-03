@@ -1,0 +1,57 @@
+<!-- Describe task in general -->
+<img src="{{MEDIA_CONVERT}}title.png" class="title_img" />
+<p>
+    Gibt eine Zeichenkette zurück, die den Spaltentitel darstellt, wie er in einem Excel-Blatt erscheint.
+</p>
+<p>
+    Aber wie funktioniert die Excel-Spaltennummerierung eigentlich? Nun, die Spaltennummer ist wie eine Dezimalzahl, aber mit der Basis (Radix) <b>26</b> und den "Ziffern" <b>A-Z</b>. <a target="_blank" href="https://en.wikipedia.org/wiki/Radix">Read more about number bases</a>. Schauen wir uns die genauen Zahlen an:
+</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+</pre>
+<p>Die 1-"Ziffern"-Zahlen haben ein Ende. 2-"Ziffern"-Zahlen beginnen mit der doppelten ersten "Ziffer" und gehen bis zur doppelten letzten:</p>
+<pre>
+Excel   Decimal
+    A   1
+   ..
+    Z   26
+   AA   27
+   ..
+   AZ   52
+   BA   53
+   ..
+   BZ   78
+   CA   79
+   ..
+   ..
+   ZZ   702
+</pre>
+<p>Jetzt sind die 3-"stelligen" Zahlen an der Reihe...</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>Eingabe:</strong> Eine Zeichenkette <span>(str{% if is_js %}ing{% endif %})</span>.
+</p>
+
+<p>
+   <strong>Ausgabe:</strong> Eine Ganzzahl <span>{% if is_js %}(number){% else %}(int){% endif %}</span>. 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>Beispiele:</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p>
+    <strong>Vorbedingung:</strong>
+    <i>Nicht leer, nur Großbuchstaben, nur englische Buchstaben</i>
+</p>
