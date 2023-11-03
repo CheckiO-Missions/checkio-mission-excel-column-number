@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+    </div>
+    <div class="answer">
+        <p>
+            wie in der Beschreibung angegeben, ist die Excel-Spalte Buchstabentitel wie die bekannte Dezimalzahl aufgebaut, allerdings mit der Basis 26 (Anzahl der Buchstaben im Alphabet). Der Weg zur Lösung der Aufgabe besteht also darin, den Buchstaben an jeder Position zu nehmen, ihn in eine Zahl umzuwandeln und mit der Basis in der jeweiligen Potenz der Position zu multiplizieren. Fassen Sie dann alle diese Zahlen zusammen.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, womit soll ich anfangen?
+    </div>
+    <div class="answer">
+        <p>
+            lassen Sie uns eine Variable <b class="code">res</b> deklarieren, in der Sie das Ergebnis für jeden Buchstaben akkumulieren und am Ende zurückgeben werden.
+        </p>
+        <pre class="brush: javascript">
+let res = 0;
+...
+return res
+        </pre>
+        <p>
+            Als nächstes müssen Sie natürlich über die angegebene Zeichenkette iterieren und <b class="code">res</b> um einen Wert erhöhen. Verwenden Sie dazu die Eigenschaften <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">for loop</a> und String <a target="_blank" href="https://www.w3schools.com/jsref/jsref_length_string.asp">length</a>.
+        </p>
+        <pre class="brush: javascript">
+for (let i = 0; i < name.length; i++){
+    res += ...
+}
+        </pre>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Was soll ich als nächstes tun?
+    </div>
+    <div class="answer">
+        <p>
+            Während der Iteration müssen Sie nun jedes Zeichen in sein Zahlenäquivalent umwandeln, d.h. "A" sollte zu 1 werden (da es die erste Zahl in diesem System ist), "B" - 2... "Z" - 26. Verwenden Sie zu diesem Zweck die Methode <a target="_blank" href="https://www.w3schools.com/jsref/jsref_charcodeat.asp">charCodeAt()</a>, die den Code für das Zeichen am exakten Index zurückgibt.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)
+        </pre>
+        <p>
+            Sie werden feststellen, dass diese Methode 65 für "A" zurückgibt. Um 1 zu erhalten, müssen Sie also 64 subtrahieren.
+        </p>
+        <pre class="brush: javascript">
+name.charCodeAt(i)-64
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Erklären Sie mir hier mehr über die Basis.
+    </div>
+    <div class="answer">
+        <p>
+            Lassen Sie uns zum Beispiel eine Dezimalzahl (auf 10 basierend) "12" untersuchen. Um von 0 auf 12 zu kommen, müssen Sie die gesamte Basis (1..10) und zwei weitere Schritte (11, 12) zurücklegen. Abstrakter ausgedrückt: Wenn Sie eine zweistellige Dezimalzahl "ab" haben, wie viele "Einsen" enthält sie? Es ist a*10 + b.
+        </p>
+        <p>
+            Das Gleiche gilt hier. Wenn Sie einen Excel-Titel "AB" haben, wie viele "Einsen" enthält er dann? Sie müssen von "A" bis "Z" (durch die gesamte Basis - 26) und zwei weitere Schritte ("AA", "AB") gehen: a*26 + b (wobei "a", "b" die Zahlenäquivalente von "A", 'B' sind).
+        </p>
+        <p>
+            Wenn Sie große Zahlen in einer beliebigen Basis haben, ist die Regel eigentlich dieselbe: Um die Anzahl der "Einsen" zu erhalten, sollten Sie die Zahl an jeder Position mit der Basis in einer bestimmten Potenz multiplizieren. In unserem Fall:
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie findet man diese Potenz heraus?
+    </div>
+    <div class="answer">
+        <p>
+            Lassen Sie uns ein weiteres Beispiel mit einer größeren Dezimalzahl entdecken. Wenn Sie eine Zahl mit den Ziffern 1 2 5 haben, wie viele "Einsen" enthält sie? Es ist 1*10**2 + 2*10**1 + 5*10**0 = 125. Mit dem 0-Basis-Index "i" können Sie sehen, dass i+Potenz = Länge - 1. Also Potenz = Länge - 1 - i. Diese Regel gilt für jede Basis.
+        </p>
+        <pre class="brush: javascript">
+res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Wie sollte also meine endgültige Lösung aussehen?
+    </div>
+    <div class="answer">
+        <p>
+            Sie müssen nur noch alles zusammenfügen und Ihren Code in einen Funktionsausdruck verpacken. 
+        </p>
+        <p>Hier ist die gesamte Lösung:</p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+
+    let res = 0;
+    for (let i = 0; i < name.length; i++){
+        res += (name.charCodeAt(i)-64)*26**(name.length-1-i)
+    }
+    return res
+}
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Zeigen Sie mir mehr Lösungen!<br />
+        denn ich möchte ein echter 🥇 Javascript-Held sein!
+    </div>
+    <div class="answer">
+        <p>Klar, schnappen Sie es sich!</p>
+        <p>
+            Konvertieren Sie String in ein Array und verwenden Sie die Funktion <b class="code">reduce</b>, um bei jedem Schritt mit der Basis zu multiplizieren und die entsprechende Zahl für das aktuelle Zeichen hinzuzufügen.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function columnNumber(name: string): number {
+    return [...name].reduce((col, c) => col * 26 + c.charCodeAt(0) - 64, 0);
+    }
+        </pre>
+        </div>
+        <p>Klicken Sie im Missionsmenü auf <b>Best solutions</b> und sehen Sie sich viele andere interessante Lösungen an!</p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Vielen Dank! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+    </div>
+    <div class="answer">
+        👍 Freut mich zu hören!
+    </div>
+</div>
+</body>
