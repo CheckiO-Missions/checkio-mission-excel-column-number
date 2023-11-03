@@ -1,0 +1,139 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich weiß nicht, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Die Aufgabe hier ist einfach. Sie müssen sich überlegen, wie Sie das Fortschreiten der Spaltennummer mathematisch beschreiben können, und zwar auf der Grundlage der Tatsache, dass Sie die Buchstaben dieser Spalte kennen (je höher der Buchstabe, desto mehr Buchstaben - desto größer wird die Zahl). Vielleicht können Sie die Buchstaben irgendwie in eine ganze Zahl umwandeln...?
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich brauche Hilfe, um die Mission fortzusetzen.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Es wird nützlich für Sie sein, einige Informationen zu lesen:
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#ord'>ord()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_ord.asp'>example</a>),
+       <a target="_blank" href='https://docs.python.org/3/library/functions.html#len'>len()</a>
+        (<a target="_blank" href='https://www.w3schools.com/python/ref_func_len.asp'>example</a>).
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Sie brauchen Hilfe!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Wir müssen also unsere Spalte letter in eine Ganzzahl umwandeln. Das sieht dann so aus.
+        </p>
+        <pre class="brush: python">
+name = "A"
+print(ord(name))
+        </pre>
+        <div class="output">
+            <p>Ausgabe:</p>
+            <pre>65</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich weiß nicht mehr, was ich tun soll. Ich brauche einen kleinen Hinweis.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Wir brauchen den ersten Buchstaben, um 1 auszugeben, nicht 65. Außerdem kann die Funktion ord() nur einen Buchstaben akzeptieren. Lassen Sie uns also auch dies vorhersagen, für den Fall einer Zeile, deren Länge größer als 1 ist. Wir werden eine <b class="code">while</b> Schleife verwenden, in der wir ein Element aus der Zeile nehmen, bis die Zeile endet.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+while name:
+    print(ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+        <div class="output">
+            <p>Ausgabe:</p>
+            <pre>1</pre>
+            <pre>25</pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nichts funktioniert. SOS
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Okay, jetzt ist es an der Zeit, über die Mathematik nachzudenken. Wenn wir einen Buchstaben in einer Zeichenkette haben - ist alles klar, wir geben einfach seinen "Wert" in Form einer Ganzzahl zurück. Aber wenn es zwei oder mehr Buchstaben sind? Lassen Sie uns die beiden Buchstaben "AY" als Beispiel analysieren. Da es sich um zwei Buchstaben handelt und der erste Buchstabe "A" ist, bedeutet dies, dass er einen Wert von 27 und nicht 1 hat, da er nach "Z" kommt. Der nächste Buchstabe ist "Y", er hat einen Wert von 25, also addieren wir 27 + 25 und unser Ergebnis.
+        </p>
+        <pre class="brush: python">
+name = "AY"
+result = 0
+while name:
+    result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+    name = name[1:]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich will nicht aufgeben, helfen Sie mir!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Alles, was Sie tun müssen, ist, den Code in einen Funktionsausdruck zu verpacken und den Wert <b class="code">result</b> zurückzugeben.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    result = 0
+    while name:
+        result += (26 ** (len(name) - 1)) * (ord(name[0]) - 64)
+        name = name[1:]
+        
+    return result
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich möchte der beste der besten PROGRAMMIERER werden!!! ZEIGEN SIE MIR MEHR LÖSUNGEN!!!1!!!11!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Okay, okay! Das ist die richtige Einstellung!=) Hier ist eine Variante der Lösung durch die <b class="code">for</b> Schleife. Die mathematische Formel ist die gleiche.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def column_number(name: str) -> int:
+
+    total = 0
+    for i, j in enumerate(name[::-1]):
+        total += (ord(j) - 64) * (26 ** i)
+        
+    return total
+        </pre>
+        </div>
+    </div>
+</div>
+</body>
